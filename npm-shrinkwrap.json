@@ -493,6 +493,11 @@
       "resolved": "https://registry.npmjs.org/block-stream/-/block-stream-0.0.9.tgz",
       "dev": true
     },
+    "blockmap": {
+      "version": "1.1.0",
+      "from": "blockmap@>=1.1.0 <2.0.0",
+      "resolved": "https://registry.npmjs.org/blockmap/-/blockmap-1.1.0.tgz"
+    },
     "bloodline": {
       "version": "1.0.1",
       "from": "bloodline@>=1.0.1 <2.0.0",
@@ -1292,6 +1297,18 @@
           "from": "isarray@^1.0.0",
           "resolved": "https://registry.npmjs.org/isarray/-/isarray-1.0.0.tgz",
           "dev": true
+        }
+      }
+    },
+    "dom-serializer": {
+      "version": "0.1.0",
+      "from": "dom-serializer@>=0.0.0 <1.0.0",
+      "resolved": "https://registry.npmjs.org/dom-serializer/-/dom-serializer-0.1.0.tgz",
+      "dependencies": {
+        "domelementtype": {
+          "version": "1.1.3",
+          "from": "domelementtype@>=1.1.1 <1.2.0",
+          "resolved": "https://registry.npmjs.org/domelementtype/-/domelementtype-1.1.3.tgz"
         }
       }
     },
@@ -2844,6 +2861,17 @@
       "from": "html-tag@>=0.2.1 <0.3.0",
       "resolved": "https://registry.npmjs.org/html-tag/-/html-tag-0.2.1.tgz",
       "dev": true
+    },
+    "htmlescape": {
+      "version": "1.1.1",
+      "from": "htmlescape@>=1.1.0 <2.0.0",
+      "resolved": "https://registry.npmjs.org/htmlescape/-/htmlescape-1.1.1.tgz",
+      "dev": true
+    },
+    "htmlparser2": {
+      "version": "3.9.2",
+      "from": "htmlparser2@>=3.9.2 <4.0.0",
+      "resolved": "https://registry.npmjs.org/htmlparser2/-/htmlparser2-3.9.2.tgz"
     },
     "http-proxy-agent": {
       "version": "0.2.7",
@@ -8243,6 +8271,23 @@
         }
       }
     },
+    "pipage": {
+      "version": "1.0.1",
+      "from": "pipage@latest",
+      "resolved": "https://registry.npmjs.org/pipage/-/pipage-1.0.1.tgz",
+      "dependencies": {
+        "debug": {
+          "version": "2.6.7",
+          "from": "debug@>=2.6.1 <2.7.0",
+          "resolved": "https://registry.npmjs.org/debug/-/debug-2.6.7.tgz"
+        },
+        "ms": {
+          "version": "2.0.0",
+          "from": "ms@2.0.0",
+          "resolved": "https://registry.npmjs.org/ms/-/ms-2.0.0.tgz"
+        }
+      }
+    },
     "pkg-conf": {
       "version": "1.1.3",
       "from": "pkg-conf@>=1.1.2 <2.0.0",
@@ -9963,6 +10008,11 @@
       "from": "xdg-basedir@>=3.0.0 <4.0.0",
       "resolved": "https://registry.npmjs.org/xdg-basedir/-/xdg-basedir-3.0.0.tgz",
       "dev": true
+    },
+    "xml": {
+      "version": "1.0.1",
+      "from": "xml@>=1.0.1 <2.0.0",
+      "resolved": "https://registry.npmjs.org/xml/-/xml-1.0.1.tgz"
     },
     "xml2js": {
       "version": "0.4.17",
