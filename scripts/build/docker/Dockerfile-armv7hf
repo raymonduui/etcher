@@ -1,13 +1,14 @@
-FROM erwinchang/ubuntu-12.04-32bit-build
+FROM resin/armv7hf-debian-qemu:latest
 
+
+RUN [ "cross-build-start" ]
 
 
 # Setup APT sources
 
-RUN sed s,ubuntu\.stu\.edu\.tw,archive.ubuntu.com, /etc/apt/sources.list > /tmp/sources.list \
-  && mv /tmp/sources.list /etc/apt/sources.list
 
 
+RUN echo "deb http://ftp.debian.org/debian jessie-backports main" >> /etc/apt/sources.list
 
 
 # Install dependencies
@@ -40,11 +41,6 @@ RUN apt-get update \
     rpm
 
 
-# Install a C++11 compiler
-RUN add-apt-repository ppa:ubuntu-toolchain-r/test \
-  && apt-get update && apt-get install -y gcc-4.8 g++-4.8 \
-  && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 50
-
 
 # NodeJS
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
@@ -59,4 +55,6 @@ RUN npm config set spin=false
 COPY requirements.txt requirements.txt
 RUN pip install --quiet -r requirements.txt
 
+
+RUN [ "cross-build-end" ]
 
