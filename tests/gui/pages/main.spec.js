@@ -242,7 +242,7 @@ describe('Browser: MainPage', function() {
           });
 
           return settings.set('unmountOnSuccess', true).then(() => {
-            m.chai.expect(controller.getProgressButtonLabel()).to.equal('0%');
+            m.chai.expect(controller.getProgressButtonLabel()).to.equal('0% Flashing');
           });
         });
 
@@ -327,7 +327,7 @@ describe('Browser: MainPage', function() {
           });
 
           return settings.set('unmountOnSuccess', true).then(() => {
-            m.chai.expect(controller.getProgressButtonLabel()).to.equal('50%');
+            m.chai.expect(controller.getProgressButtonLabel()).to.equal('50% Flashing');
           });
         });
 
@@ -344,7 +344,7 @@ describe('Browser: MainPage', function() {
           });
 
           return settings.set('unmountOnSuccess', false).then(() => {
-            m.chai.expect(controller.getProgressButtonLabel()).to.equal('50%');
+            m.chai.expect(controller.getProgressButtonLabel()).to.equal('50% Flashing');
           });
         });
 
@@ -361,7 +361,7 @@ describe('Browser: MainPage', function() {
           });
 
           return settings.set('unmountOnSuccess', true).then(() => {
-            m.chai.expect(controller.getProgressButtonLabel()).to.equal('50% Validating...');
+            m.chai.expect(controller.getProgressButtonLabel()).to.equal('50% Validating');
           });
         });
 
@@ -378,7 +378,7 @@ describe('Browser: MainPage', function() {
           });
 
           return settings.set('unmountOnSuccess', false).then(() => {
-            m.chai.expect(controller.getProgressButtonLabel()).to.equal('50% Validating...');
+            m.chai.expect(controller.getProgressButtonLabel()).to.equal('50% Validating');
           });
         });
 
