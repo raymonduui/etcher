@@ -5,7 +5,6 @@ const _ = require('lodash');
 const path = require('path');
 const supportedFormats = require('../../../lib/shared/supported-formats');
 const angular = require('angular');
-const settings = require('../../../lib/gui/models/settings');
 const flashState = require('../../../lib/shared/models/flash-state');
 const availableDrives = require('../../../lib/shared/models/available-drives');
 const selectionState = require('../../../lib/shared/models/selection-state');
