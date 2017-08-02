@@ -22,6 +22,7 @@ const request = Bluebird.promisifyAll(require('request'));
 const nock = require('nock');
 const s3Packages = require('../../lib/shared/s3-packages');
 const release = require('../../lib/shared/release');
+const errors = require('../../lib/shared/errors');
 
 describe('Shared: s3Packages', function() {
 
@@ -588,9 +589,10 @@ describe('Shared: s3Packages', function() {
         nock.cleanAll();
       });
 
-      it('should be rejected with an error', function(done) {
+      it('should be rejected with a non-user error', function(done) {
         s3Packages.getRemoteVersions(s3Packages.BUCKET_URL.PRODUCTION).catch((error) => {
           m.chai.expect(error).to.be.an.instanceof(Error);
+          m.chai.expect(errors.isUserError(error)).to.be.false;
           done();
         });
       });
@@ -611,11 +613,12 @@ describe('Shared: s3Packages', function() {
         this.requestGetAsyncStub.restore();
       });
 
-      it('should resolve an empty array', function(done) {
-        s3Packages.getRemoteVersions(s3Packages.BUCKET_URL.PRODUCTION).then((versions) => {
-          m.chai.expect(versions).to.deep.equal([]);
+      it('should be rejected with a user error with code UPDATE_USER_ERROR', function(done) {
+        s3Packages.getRemoteVersions(s3Packages.BUCKET_URL.PRODUCTION).catch((error) => {
+          m.chai.expect(errors.isUserError(error)).to.be.true;
+          m.chai.expect(error.code).to.equal('UPDATE_USER_ERROR');
           done();
-        }).catch(done);
+        });
       });
 
     });
@@ -634,11 +637,12 @@ describe('Shared: s3Packages', function() {
         this.requestGetAsyncStub.restore();
       });
 
-      it('should resolve an empty array', function(done) {
-        s3Packages.getRemoteVersions(s3Packages.BUCKET_URL.PRODUCTION).then((versions) => {
-          m.chai.expect(versions).to.deep.equal([]);
+      it('should be rejected with a user error with code UPDATE_USER_ERROR', function(done) {
+        s3Packages.getRemoteVersions(s3Packages.BUCKET_URL.PRODUCTION).catch((error) => {
+          m.chai.expect(errors.isUserError(error)).to.be.true;
+          m.chai.expect(error.code).to.equal('UPDATE_USER_ERROR');
           done();
-        }).catch(done);
+        });
       });
 
     });
@@ -657,11 +661,12 @@ describe('Shared: s3Packages', function() {
         this.requestGetAsyncStub.restore();
       });
 
-      it('should resolve an empty array', function(done) {
-        s3Packages.getRemoteVersions(s3Packages.BUCKET_URL.PRODUCTION).then((versions) => {
-          m.chai.expect(versions).to.deep.equal([]);
+      it('should be rejected with a user error with code UPDATE_USER_ERROR', function(done) {
+        s3Packages.getRemoteVersions(s3Packages.BUCKET_URL.PRODUCTION).catch((error) => {
+          m.chai.expect(errors.isUserError(error)).to.be.true;
+          m.chai.expect(error.code).to.equal('UPDATE_USER_ERROR');
           done();
-        }).catch(done);
+        });
       });
 
     });
@@ -680,11 +685,12 @@ describe('Shared: s3Packages', function() {
         this.requestGetAsyncStub.restore();
       });
 
-      it('should resolve an empty array', function(done) {
-        s3Packages.getRemoteVersions(s3Packages.BUCKET_URL.PRODUCTION).then((versions) => {
-          m.chai.expect(versions).to.deep.equal([]);
+      it('should be rejected with a user error with code UPDATE_USER_ERROR', function(done) {
+        s3Packages.getRemoteVersions(s3Packages.BUCKET_URL.PRODUCTION).catch((error) => {
+          m.chai.expect(errors.isUserError(error)).to.be.true;
+          m.chai.expect(error.code).to.equal('UPDATE_USER_ERROR');
           done();
-        }).catch(done);
+        });
       });
 
     });
@@ -703,11 +709,12 @@ describe('Shared: s3Packages', function() {
         this.requestGetAsyncStub.restore();
       });
 
-      it('should resolve an empty array', function(done) {
-        s3Packages.getRemoteVersions(s3Packages.BUCKET_URL.PRODUCTION).then((versions) => {
-          m.chai.expect(versions).to.deep.equal([]);
+      it('should be rejected with a user error with code UPDATE_USER_ERROR', function(done) {
+        s3Packages.getRemoteVersions(s3Packages.BUCKET_URL.PRODUCTION).catch((error) => {
+          m.chai.expect(errors.isUserError(error)).to.be.true;
+          m.chai.expect(error.code).to.equal('UPDATE_USER_ERROR');
           done();
-        }).catch(done);
+        });
       });
 
     });
@@ -726,11 +733,36 @@ describe('Shared: s3Packages', function() {
         this.requestGetAsyncStub.restore();
       });
 
-      it('should resolve an empty array', function(done) {
-        s3Packages.getRemoteVersions(s3Packages.BUCKET_URL.PRODUCTION).then((versions) => {
-          m.chai.expect(versions).to.deep.equal([]);
+      it('should be rejected with a user error with code UPDATE_USER_ERROR', function(done) {
+        s3Packages.getRemoteVersions(s3Packages.BUCKET_URL.PRODUCTION).catch((error) => {
+          m.chai.expect(errors.isUserError(error)).to.be.true;
+          m.chai.expect(error.code).to.equal('UPDATE_USER_ERROR');
           done();
-        }).catch(done);
+        });
+      });
+
+    });
+
+    describe('given UNABLE_TO_GET_ISSUER_CERT_LOCALLY', function() {
+
+      beforeEach(function() {
+        const error = new Error('UNABLE_TO_GET_ISSUER_CERT_LOCALLY');
+        error.code = 'UNABLE_TO_GET_ISSUER_CERT_LOCALLY';
+
+        this.requestGetAsyncStub = m.sinon.stub(request, 'getAsync');
+        this.requestGetAsyncStub.returns(Bluebird.reject(error));
+      });
+
+      afterEach(function() {
+        this.requestGetAsyncStub.restore();
+      });
+
+      it('should be rejected with a user error with code UPDATE_USER_ERROR', function(done) {
+        s3Packages.getRemoteVersions(s3Packages.BUCKET_URL.PRODUCTION).catch((error) => {
+          m.chai.expect(errors.isUserError(error)).to.be.true;
+          m.chai.expect(error.code).to.equal('UPDATE_USER_ERROR');
+          done();
+        });
       });
 
     });
@@ -749,11 +781,12 @@ describe('Shared: s3Packages', function() {
         this.requestGetAsyncStub.restore();
       });
 
-      it('should resolve an empty array', function(done) {
-        s3Packages.getRemoteVersions(s3Packages.BUCKET_URL.PRODUCTION).then((versions) => {
-          m.chai.expect(versions).to.deep.equal([]);
+      it('should be rejected with a user error with code UPDATE_USER_ERROR', function(done) {
+        s3Packages.getRemoteVersions(s3Packages.BUCKET_URL.PRODUCTION).catch((error) => {
+          m.chai.expect(errors.isUserError(error)).to.be.true;
+          m.chai.expect(error.code).to.equal('UPDATE_USER_ERROR');
           done();
-        }).catch(done);
+        });
       });
 
     });
